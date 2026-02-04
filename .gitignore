@@ -36,7 +36,6 @@ venv.bak/
 *.swp
 *.swo
 *~
-.DS_Store
 
 # Testing
 .pytest_cache/
@@ -52,3 +51,7 @@ htmlcov/
 /tmp/
 *.tmp
 *.log
+
+# OS
+.DS_Store
+Thumbs.db
