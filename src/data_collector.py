@@ -1,11 +1,19 @@
 """Data collector module for gathering AI app/marketplace data."""
 
+from .play_store_scraper import PlayStoreScraper
+from .app_store_scraper import AppStoreScraper
+from .sensor_tower_client import SensorTowerClient
+
+
 class DataCollector:
     """Collects data about AI apps and marketplaces."""
     
     def __init__(self):
-        """Initialize the data collector with sample AI app data."""
-        self.data = self._get_sample_data()
+        """Initialize the data collector with scrapers."""
+        self.play_store_scraper = PlayStoreScraper()
+        self.app_store_scraper = AppStoreScraper()
+        self.sensor_tower_client = SensorTowerClient()
+        self.sample_data = self._get_sample_data()
     
     def _get_sample_data(self):
         """Return sample data of 29 real AI apps with accurate information."""
@@ -23,7 +31,10 @@ class DataCollector:
                 'Website': 'https://chat.openai.com',
                 'Key Features': 'AI chat, code generation, image analysis, web browsing, GPT-4',
                 'Region': 'Global',
-                'Last Updated': '2026-02-01'
+                'Release Date': '2022-11-30',
+                'Last Updated': '2026-02-01',
+                'Source': 'Sample Data',
+                'Trending Rank': 'N/A'
             },
             {
                 'App Name': 'Claude',
@@ -37,7 +48,10 @@ class DataCollector:
                 'Website': 'https://claude.ai',
                 'Key Features': 'Safe AI, long context (200k tokens), document analysis, coding',
                 'Region': 'Global',
-                'Last Updated': '2026-02-02'
+                'Release Date': 'N/A',
+                'Last Updated': '2026-02-02',
+                'Source': 'Sample Data',
+                'Trending Rank': 'N/A'
             },
             {
                 'App Name': 'Gemini',
@@ -51,7 +65,10 @@ class DataCollector:
                 'Website': 'https://gemini.google.com',
                 'Key Features': 'Multimodal AI, Google integration, real-time information, image generation',
                 'Region': 'Global',
-                'Last Updated': '2026-01-28'
+                'Release Date': 'N/A',
+                'Last Updated': '2026-01-28',
+                'Source': 'Sample Data',
+                'Trending Rank': 'N/A'
             },
             {
                 'App Name': 'Microsoft Copilot',
@@ -65,7 +82,10 @@ class DataCollector:
                 'Website': 'https://copilot.microsoft.com',
                 'Key Features': 'GPT-4 powered, image generation, Microsoft 365 integration',
                 'Region': 'Global',
-                'Last Updated': '2026-01-30'
+                'Release Date': 'N/A',
+                'Last Updated': '2026-01-30',
+                'Source': 'Sample Data',
+                'Trending Rank': 'N/A'
             },
             {
                 'App Name': 'Perplexity',
@@ -79,7 +99,10 @@ class DataCollector:
                 'Website': 'https://perplexity.ai',
                 'Key Features': 'AI-powered search, citations, research assistant, real-time web access',
                 'Region': 'Global',
-                'Last Updated': '2026-02-03'
+                'Release Date': 'N/A',
+                'Last Updated': '2026-02-03',
+                'Source': 'Sample Data',
+                'Trending Rank': 'N/A'
             },
             {
                 'App Name': 'Character.AI',
@@ -93,7 +116,10 @@ class DataCollector:
                 'Website': 'https://character.ai',
                 'Key Features': 'Create AI characters, roleplay, entertainment, custom personalities',
                 'Region': 'Global',
-                'Last Updated': '2026-01-25'
+                'Release Date': 'N/A',
+                'Last Updated': '2026-01-25',
+                'Source': 'Sample Data',
+                'Trending Rank': 'N/A'
             },
             {
                 'App Name': 'Pi',
@@ -107,7 +133,10 @@ class DataCollector:
                 'Website': 'https://pi.ai',
                 'Key Features': 'Personal AI, conversational, supportive, voice chat',
                 'Region': 'Global',
-                'Last Updated': '2026-01-20'
+                'Release Date': 'N/A',
+                'Last Updated': '2026-01-20',
+                'Source': 'Sample Data',
+                'Trending Rank': 'N/A'
             },
             {
                 'App Name': 'Poe',
@@ -121,7 +150,10 @@ class DataCollector:
                 'Website': 'https://poe.com',
                 'Key Features': 'Multiple AI models, GPT-4, Claude, custom bots, bot creation',
                 'Region': 'Global',
-                'Last Updated': '2026-01-27'
+                'Release Date': 'N/A',
+                'Last Updated': '2026-01-27',
+                'Source': 'Sample Data',
+                'Trending Rank': 'N/A'
             },
             
             # Image Generation
@@ -137,7 +169,10 @@ class DataCollector:
                 'Website': 'https://www.midjourney.com',
                 'Key Features': 'AI image generation, high quality, artistic, Discord-based',
                 'Region': 'Global',
-                'Last Updated': '2026-01-15'
+                'Release Date': 'N/A',
+                'Last Updated': '2026-01-15',
+                'Source': 'Sample Data',
+                'Trending Rank': 'N/A'
             },
             {
                 'App Name': 'DALL-E',
@@ -151,7 +186,10 @@ class DataCollector:
                 'Website': 'https://labs.openai.com',
                 'Key Features': 'AI image generation, editing, variations, prompt-based',
                 'Region': 'Global',
-                'Last Updated': '2026-01-22'
+                'Release Date': 'N/A',
+                'Last Updated': '2026-01-22',
+                'Source': 'Sample Data',
+                'Trending Rank': 'N/A'
             },
             {
                 'App Name': 'Leonardo AI',
@@ -165,7 +203,10 @@ class DataCollector:
                 'Website': 'https://leonardo.ai',
                 'Key Features': 'AI art generation, game assets, training models, consistent characters',
                 'Region': 'Global',
-                'Last Updated': '2026-01-18'
+                'Release Date': 'N/A',
+                'Last Updated': '2026-01-18',
+                'Source': 'Sample Data',
+                'Trending Rank': 'N/A'
             },
             {
                 'App Name': 'Adobe Firefly',
@@ -179,7 +220,10 @@ class DataCollector:
                 'Website': 'https://firefly.adobe.com',
                 'Key Features': 'Text to image, generative fill, text effects, Adobe integration',
                 'Region': 'Global',
-                'Last Updated': '2026-01-29'
+                'Release Date': 'N/A',
+                'Last Updated': '2026-01-29',
+                'Source': 'Sample Data',
+                'Trending Rank': 'N/A'
             },
             {
                 'App Name': 'Canva AI',
@@ -193,7 +237,10 @@ class DataCollector:
                 'Website': 'https://www.canva.com',
                 'Key Features': 'Text to image, Magic Edit, background remover, design templates',
                 'Region': 'Global',
-                'Last Updated': '2026-02-01'
+                'Release Date': 'N/A',
+                'Last Updated': '2026-02-01',
+                'Source': 'Sample Data',
+                'Trending Rank': 'N/A'
             },
             {
                 'App Name': 'Stable Diffusion',
@@ -207,7 +254,10 @@ class DataCollector:
                 'Website': 'https://stability.ai',
                 'Key Features': 'Open-source, image generation, customizable, local deployment',
                 'Region': 'Global',
-                'Last Updated': '2026-01-12'
+                'Release Date': 'N/A',
+                'Last Updated': '2026-01-12',
+                'Source': 'Sample Data',
+                'Trending Rank': 'N/A'
             },
             
             # Video/Audio
@@ -223,7 +273,10 @@ class DataCollector:
                 'Website': 'https://runwayml.com',
                 'Key Features': 'AI video generation, editing, Gen-2, motion tracking',
                 'Region': 'Global',
-                'Last Updated': '2026-01-26'
+                'Release Date': 'N/A',
+                'Last Updated': '2026-01-26',
+                'Source': 'Sample Data',
+                'Trending Rank': 'N/A'
             },
             {
                 'App Name': 'ElevenLabs',
@@ -237,7 +290,10 @@ class DataCollector:
                 'Website': 'https://elevenlabs.io',
                 'Key Features': 'Voice synthesis, voice cloning, multilingual, realistic voices',
                 'Region': 'Global',
-                'Last Updated': '2026-02-02'
+                'Release Date': 'N/A',
+                'Last Updated': '2026-02-02',
+                'Source': 'Sample Data',
+                'Trending Rank': 'N/A'
             },
             {
                 'App Name': 'Synthesia',
@@ -251,7 +307,10 @@ class DataCollector:
                 'Website': 'https://www.synthesia.io',
                 'Key Features': 'AI video generation, avatars, text-to-video, multilingual',
                 'Region': 'Global',
-                'Last Updated': '2026-01-19'
+                'Release Date': 'N/A',
+                'Last Updated': '2026-01-19',
+                'Source': 'Sample Data',
+                'Trending Rank': 'N/A'
             },
             {
                 'App Name': 'HeyGen',
@@ -265,7 +324,10 @@ class DataCollector:
                 'Website': 'https://www.heygen.com',
                 'Key Features': 'AI avatars, video translation, voice cloning, lip sync',
                 'Region': 'Global',
-                'Last Updated': '2026-01-24'
+                'Release Date': 'N/A',
+                'Last Updated': '2026-01-24',
+                'Source': 'Sample Data',
+                'Trending Rank': 'N/A'
             },
             {
                 'App Name': 'Descript',
@@ -279,7 +341,10 @@ class DataCollector:
                 'Website': 'https://www.descript.com',
                 'Key Features': 'Transcription, AI voices, video editing, overdub, text-based editing',
                 'Region': 'Global',
-                'Last Updated': '2026-01-31'
+                'Release Date': 'N/A',
+                'Last Updated': '2026-01-31',
+                'Source': 'Sample Data',
+                'Trending Rank': 'N/A'
             },
             
             # Productivity
@@ -295,7 +360,10 @@ class DataCollector:
                 'Website': 'https://www.notion.so',
                 'Key Features': 'Writing assistance, summarization, task management, databases',
                 'Region': 'Global',
-                'Last Updated': '2026-02-03'
+                'Release Date': 'N/A',
+                'Last Updated': '2026-02-03',
+                'Source': 'Sample Data',
+                'Trending Rank': 'N/A'
             },
             {
                 'App Name': 'Grammarly',
@@ -309,7 +377,10 @@ class DataCollector:
                 'Website': 'https://www.grammarly.com',
                 'Key Features': 'Grammar checking, writing suggestions, tone detection, plagiarism',
                 'Region': 'Global',
-                'Last Updated': '2026-01-30'
+                'Release Date': 'N/A',
+                'Last Updated': '2026-01-30',
+                'Source': 'Sample Data',
+                'Trending Rank': 'N/A'
             },
             {
                 'App Name': 'Jasper',
@@ -323,7 +394,10 @@ class DataCollector:
                 'Website': 'https://www.jasper.ai',
                 'Key Features': 'AI content creation, marketing copy, blog posts, templates',
                 'Region': 'Global',
-                'Last Updated': '2026-01-21'
+                'Release Date': 'N/A',
+                'Last Updated': '2026-01-21',
+                'Source': 'Sample Data',
+                'Trending Rank': 'N/A'
             },
             {
                 'App Name': 'Copy.ai',
@@ -337,7 +411,10 @@ class DataCollector:
                 'Website': 'https://www.copy.ai',
                 'Key Features': 'Copywriting, content generation, marketing, social media posts',
                 'Region': 'Global',
-                'Last Updated': '2026-01-17'
+                'Release Date': 'N/A',
+                'Last Updated': '2026-01-17',
+                'Source': 'Sample Data',
+                'Trending Rank': 'N/A'
             },
             {
                 'App Name': 'Otter.ai',
@@ -351,7 +428,10 @@ class DataCollector:
                 'Website': 'https://otter.ai',
                 'Key Features': 'Meeting transcription, real-time notes, AI summaries, collaboration',
                 'Region': 'Global',
-                'Last Updated': '2026-02-01'
+                'Release Date': 'N/A',
+                'Last Updated': '2026-02-01',
+                'Source': 'Sample Data',
+                'Trending Rank': 'N/A'
             },
             
             # Code Assistants
@@ -367,7 +447,10 @@ class DataCollector:
                 'Website': 'https://github.com/features/copilot',
                 'Key Features': 'Code completion, suggestions, chat, multi-language support',
                 'Region': 'Global',
-                'Last Updated': '2026-02-02'
+                'Release Date': 'N/A',
+                'Last Updated': '2026-02-02',
+                'Source': 'Sample Data',
+                'Trending Rank': 'N/A'
             },
             {
                 'App Name': 'Cursor',
@@ -381,7 +464,10 @@ class DataCollector:
                 'Website': 'https://cursor.sh',
                 'Key Features': 'AI code editor, codebase understanding, chat, refactoring',
                 'Region': 'Global',
-                'Last Updated': '2026-01-28'
+                'Release Date': 'N/A',
+                'Last Updated': '2026-01-28',
+                'Source': 'Sample Data',
+                'Trending Rank': 'N/A'
             },
             {
                 'App Name': 'Tabnine',
@@ -395,7 +481,10 @@ class DataCollector:
                 'Website': 'https://www.tabnine.com',
                 'Key Features': 'Code completion, privacy-focused, team learning, IDE integration',
                 'Region': 'Global',
-                'Last Updated': '2026-01-23'
+                'Release Date': 'N/A',
+                'Last Updated': '2026-01-23',
+                'Source': 'Sample Data',
+                'Trending Rank': 'N/A'
             },
             {
                 'App Name': 'Codeium',
@@ -409,7 +498,10 @@ class DataCollector:
                 'Website': 'https://codeium.com',
                 'Key Features': 'Free code completion, 70+ languages, chat, search',
                 'Region': 'Global',
-                'Last Updated': '2026-01-29'
+                'Release Date': 'N/A',
+                'Last Updated': '2026-01-29',
+                'Source': 'Sample Data',
+                'Trending Rank': 'N/A'
             },
             {
                 'App Name': 'Amazon CodeWhisperer',
@@ -423,13 +515,144 @@ class DataCollector:
                 'Website': 'https://aws.amazon.com/codewhisperer',
                 'Key Features': 'Code suggestions, security scanning, AWS integration, reference tracking',
                 'Region': 'Global',
-                'Last Updated': '2026-01-25'
+                'Release Date': 'N/A',
+                'Last Updated': '2026-01-25',
+                'Source': 'Sample Data',
+                'Trending Rank': 'N/A'
             },
         ]
     
+    def _deduplicate_apps(self, apps):
+        """
+        Remove duplicate apps from the list based on app name and company.
+        
+        Args:
+            apps: List of app dictionaries
+            
+        Returns:
+            Deduplicated list of apps
+        """
+        seen = {}
+        deduplicated = []
+        
+        for app in apps:
+            # Create a unique key based on app name (case-insensitive)
+            key = app.get('App Name', '').lower().strip()
+            
+            if key and key not in seen:
+                seen[key] = True
+                deduplicated.append(app)
+            elif key:
+                # If duplicate, merge data (prefer non-N/A values)
+                existing = next((a for a in deduplicated if a.get('App Name', '').lower().strip() == key), None)
+                if existing:
+                    # Merge store links
+                    if existing.get('App Store Link') == 'N/A' and app.get('App Store Link') != 'N/A':
+                        existing['App Store Link'] = app['App Store Link']
+                    if existing.get('Play Store Link') == 'N/A' and app.get('Play Store Link') != 'N/A':
+                        existing['Play Store Link'] = app['Play Store Link']
+                    # Merge other N/A fields
+                    for field in ['Website', 'Release Date', 'Company']:
+                        if existing.get(field) == 'N/A' and app.get(field) != 'N/A':
+                            existing[field] = app[field]
+        
+        return deduplicated
+    
+    def _merge_data_sources(self, *app_lists):
+        """
+        Merge data from multiple sources and deduplicate.
+        
+        Args:
+            *app_lists: Variable number of app lists to merge
+            
+        Returns:
+            Merged and deduplicated list
+        """
+        all_apps = []
+        for app_list in app_lists:
+            all_apps.extend(app_list)
+        
+        return self._deduplicate_apps(all_apps)
+    
+    def collect_from_sources(self, sources=['sample'], categories=None, new_releases=False, 
+                            trending=False, limit=None):
+        """
+        Collect app data from specified sources.
+        
+        Args:
+            sources: List of sources to collect from ('play-store', 'app-store', 'sensor-tower', 'sample', 'all')
+            categories: List of categories to filter
+            new_releases: Filter for newly released apps
+            trending: Filter for trending apps
+            limit: Maximum total number of apps to return
+            
+        Returns:
+            List of app dictionaries
+        """
+        all_apps = []
+        
+        # Normalize sources
+        if 'all' in sources:
+            sources = ['play-store', 'app-store', 'sensor-tower', 'sample']
+        
+        # Collect from each source
+        if 'play-store' in sources:
+            try:
+                print("\n📱 Collecting from Google Play Store...")
+                play_apps = self.play_store_scraper.scrape_apps(
+                    categories=categories,
+                    new_releases=new_releases,
+                    trending=trending,
+                    limit=limit
+                )
+                all_apps.extend(play_apps)
+            except Exception as e:
+                print(f"⚠️  Error collecting from Play Store: {e}")
+        
+        if 'app-store' in sources:
+            try:
+                print("\n🍎 Collecting from Apple App Store...")
+                app_store_apps = self.app_store_scraper.scrape_apps(
+                    categories=categories,
+                    new_releases=new_releases,
+                    trending=trending,
+                    limit=limit
+                )
+                all_apps.extend(app_store_apps)
+            except Exception as e:
+                print(f"⚠️  Error collecting from App Store: {e}")
+        
+        if 'sensor-tower' in sources:
+            try:
+                print("\n📊 Collecting from Sensor Tower...")
+                sensor_apps = self.sensor_tower_client.scrape_apps(
+                    categories=categories,
+                    new_releases=new_releases,
+                    trending=trending,
+                    limit=limit
+                )
+                all_apps.extend(sensor_apps)
+            except Exception as e:
+                print(f"⚠️  Error collecting from Sensor Tower: {e}")
+        
+        if 'sample' in sources:
+            print("\n📚 Using sample data...")
+            sample_apps = self.get_data(category=categories[0] if categories and len(categories) == 1 else None)
+            all_apps.extend(sample_apps)
+        
+        # Deduplicate merged results
+        deduplicated = self._deduplicate_apps(all_apps)
+        
+        # Apply limit to final results
+        if limit and len(deduplicated) > limit:
+            deduplicated = deduplicated[:limit]
+        
+        print(f"\n✨ Total unique apps collected: {len(deduplicated)}")
+        return deduplicated
+    
     def get_data(self, category=None, region=None, limit=None):
         """
-        Get filtered data based on category and region.
+        Get filtered sample data based on category and region.
         
         Args:
             category: Filter by category (e.g., 'Chatbot', 'Image Generation')
@@ -439,7 +662,7 @@ class DataCollector:
         Returns:
             List of dictionaries containing app data
         """
-        filtered_data = self.data
+        filtered_data = self.sample_data
         
         # Filter by category
         if category and category != 'All':
@@ -456,9 +679,9 @@ class DataCollector:
         return filtered_data
     
     def get_categories(self):
-        """Get list of unique categories in the data."""
-        return list(set(app['Category'] for app in self.data))
+        """Get list of unique categories in the sample data."""
+        return list(set(app['Category'] for app in self.sample_data))
     
     def get_regions(self):
-        """Get list of unique regions in the data."""
-        return list(set(app['Region'] for app in self.data))
+        """Get list of unique regions in the sample data."""
+        return list(set(app['Region'] for app in self.sample_data))
