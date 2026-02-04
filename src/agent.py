@@ -1,127 +1,150 @@
-"""Main CLI entry point for the market analysis agent."""
+"""Main agent module for market analysis."""
 
 import argparse
-import sys
-from src.data_collector import DataCollector
-from src.excel_writer import ExcelWriter
+import os
+from .data_collector import DataCollector
+from .excel_writer import ExcelWriter
+from .config import Config
+
+
+class MarketAnalysisAgent:
+    """Main agent for conducting market research on AI apps/marketplaces."""
+    
+    def __init__(self):
+        """Initialize the market analysis agent."""
+        self.data_collector = DataCollector()
+    
+    def run(self, output_file=None, category=None, region=None, limit=None, 
+            group_by_category=False):
+        """
+        Run the market analysis agent.
+        
+        Args:
+            output_file: Path to output Excel file
+            category: Filter by category
+            region: Filter by region
+            limit: Maximum number of results
+            group_by_category: Whether to create separate sheets by category
+            
+        Returns:
+            Path to the generated Excel file
+        """
+        print("🤖 Market Analysis Agent Starting...")
+        print(f"📊 Collecting data on AI apps and marketplaces...")
+        
+        # Get data
+        data = self.data_collector.get_data(
+            category=category,
+            region=region,
+            limit=limit
+        )
+        
+        print(f"✅ Found {len(data)} apps matching criteria")
+        
+        # Initialize Excel writer
+        excel_writer = ExcelWriter(filename=output_file)
+        
+        # Write data
+        if group_by_category:
+            print("📝 Generating Excel file with sheets by category...")
+            # Group data by category
+            categories = {}
+            for app in data:
+                cat = app['Category']
+                if cat not in categories:
+                    categories[cat] = []
+                categories[cat].append(app)
+            
+            # Also add "All Apps" sheet
+            categories['All Apps'] = data
+            
+            output_path = excel_writer.write_multiple_sheets(categories)
+        else:
+            print("📝 Generating Excel file...")
+            output_path = excel_writer.write_data(data)
+        
+        print(f"✨ Excel file created successfully: {output_path}")
+        print(f"📁 Total apps in output: {len(data)}")
+        
+        return output_path
 
 
 def main():
-    """Main entry point for the CLI."""
+    """Command-line interface for the market analysis agent."""
     parser = argparse.ArgumentParser(
-        description="Market Research Agent for AI-Powered Mobile and Web Apps",
-        formatter_class=argparse.RawDescriptionHelpFormatter,
-        epilog="""
-Examples:
-  # Get all AI-powered apps
-  python -m src.agent --output ai_apps_research.xlsx
-  
-  # Filter by category
-  python -m src.agent --category photo --output photo_ai_apps.xlsx
-  
-  # Filter by platform
-  python -m src.agent --platform ios --output ios_ai_apps.xlsx
-  
-  # Get top trending only
-  python -m src.agent --trending --limit 20 --output trending_ai_apps.xlsx
-  
-  # Filter by region
-  python -m src.agent --region global --output global_ai_apps.xlsx
-        """
+        description='AI-powered market research agent for AI apps/marketplaces'
     )
     
     parser.add_argument(
-        "--output",
+        '-o', '--output',
         type=str,
-        default="ai_apps_research.xlsx",
-        help="Output Excel filename (default: ai_apps_research.xlsx)"
+        default=Config.DEFAULT_OUTPUT_FILENAME,
+        help=f'Output Excel file name (default: {Config.DEFAULT_OUTPUT_FILENAME})'
     )
     
     parser.add_argument(
-        "--category",
+        '-c', '--category',
         type=str,
-        help="Filter by category (e.g., photo, video, productivity, social, education)"
+        choices=Config.AVAILABLE_CATEGORIES,
+        help='Filter by category'
     )
     
     parser.add_argument(
-        "--platform",
+        '-r', '--region',
         type=str,
-        choices=["ios", "android", "both"],
-        help="Filter by platform (ios, android, or both)"
+        choices=Config.AVAILABLE_REGIONS,
+        help='Filter by region'
     )
     
     parser.add_argument(
-        "--trending",
-        action="store_true",
-        help="Get only top trending apps"
-    )
-    
-    parser.add_argument(
-        "--limit",
+        '-l', '--limit',
         type=int,
-        help="Limit number of results"
+        help='Maximum number of results to include'
     )
     
     parser.add_argument(
-        "--region",
-        type=str,
-        help="Filter by region availability (e.g., global, us, europe)"
+        '-g', '--group-by-category',
+        action='store_true',
+        help='Create separate sheets for each category'
+    )
+    
+    parser.add_argument(
+        '--list-categories',
+        action='store_true',
+        help='List available categories and exit'
+    )
+    
+    parser.add_argument(
+        '--list-regions',
+        action='store_true',
+        help='List available regions and exit'
     )
     
     args = parser.parse_args()
     
-    try:
-        # Initialize data collector
-        collector = DataCollector()
-        
-        # Get filtered apps
-        apps = collector.get_apps(
-            category=args.category,
-            platform=args.platform,
-            trending=args.trending,
-            limit=args.limit,
-            region=args.region
-        )
-        
-        if not apps:
-            print("No apps found matching the specified criteria.")
-            sys.exit(1)
-        
-        print(f"Found {len(apps)} AI-powered apps")
-        
-        # Create Excel writer
-        writer = ExcelWriter(args.output)
-        
-        # Write 'All Apps' sheet with filtered results
-        writer.write_all_apps(apps)
-        
-        # Only create additional sheets if no filters are applied (showing all data)
-        if not any([args.category, args.platform, args.trending, args.region, args.limit]):
-            # Write 'By Category' sheet
-            categories = collector.get_apps_by_category_grouped()
-            writer.write_by_category(categories)
-            
-            # Write 'Top Trending' sheet
-            trending_apps = collector.get_apps(trending=True, limit=20)
-            writer.write_top_trending(trending_apps)
-            
-            # Write 'By Region' sheet
-            regions = collector.get_apps_by_region_grouped()
-            writer.write_by_region(regions)
-            
-            print("Created 4 sheets: All Apps, By Category, Top Trending, By Region")
-        else:
-            print("Created 1 sheet: All Apps (filtered results)")
-        
-        # Save the workbook
-        writer.save()
-        
-        print(f"✓ Successfully generated {args.output}")
-        
-    except Exception as e:
-        print(f"Error: {e}", file=sys.stderr)
-        sys.exit(1)
+    # Handle list options
+    if args.list_categories:
+        print("Available categories:")
+        for cat in Config.AVAILABLE_CATEGORIES:
+            print(f"  - {cat}")
+        return
+    
+    if args.list_regions:
+        print("Available regions:")
+        for region in Config.AVAILABLE_REGIONS:
+            print(f"  - {region}")
+        return
+    
+    # Run the agent
+    agent = MarketAnalysisAgent()
+    agent.run(
+        output_file=args.output,
+        category=args.category,
+        region=args.region,
+        limit=args.limit,
+        group_by_category=args.group_by_category
+    )
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()

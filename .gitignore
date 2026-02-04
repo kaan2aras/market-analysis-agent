@@ -16,16 +16,21 @@ parts/
 sdist/
 var/
 wheels/
+pip-wheel-metadata/
+share/python-wheels/
 *.egg-info/
 .installed.cfg
 *.egg
+MANIFEST
 
 # Virtual environments
 venv/
-ENV/
 env/
+ENV/
+env.bak/
+venv.bak/
 
-# IDE
+# IDEs
 .vscode/
 .idea/
 *.swp
@@ -36,10 +41,16 @@ env/
 .pytest_cache/
 .coverage
 htmlcov/
+.tox/
 
-# Excel output files (except sample)
+# Output files (except sample)
 *.xlsx
 !examples/sample_output.xlsx
+
+# Temporary files
+/tmp/
+*.tmp
+*.log
 
 # OS
 .DS_Store
