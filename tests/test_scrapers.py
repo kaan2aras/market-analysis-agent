@@ -131,7 +131,8 @@ class TestDataCollectorIntegration(unittest.TestCase):
         self.assertEqual(len(result), 2)
         
         # First app should have both links merged
-        test_app = next(app for app in result if app['App Name'] == 'TestApp')
+        test_app = next((app for app in result if app['App Name'] == 'TestApp'), None)
+        self.assertIsNotNone(test_app, "TestApp should be in deduplicated results")
         self.assertEqual(test_app['App Store Link'], 'link1')
         self.assertEqual(test_app['Play Store Link'], 'link2')
     

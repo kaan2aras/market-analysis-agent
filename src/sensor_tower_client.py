@@ -123,18 +123,10 @@ class SensorTowerClient:
         
         # Format dates
         release_date = app_details.get('release_date', 'N/A')
-        if release_date and release_date != 'N/A':
-            try:
-                release_date = datetime.strptime(release_date, '%Y-%m-%d').strftime('%Y-%m-%d')
-            except:
-                pass
+        # Date is already in expected format from API
         
         updated = app_details.get('last_updated', 'N/A')
-        if updated and updated != 'N/A':
-            try:
-                updated = datetime.strptime(updated, '%Y-%m-%d').strftime('%Y-%m-%d')
-            except:
-                pass
+        # Date is already in expected format from API
         
         return {
             'App Name': app_details.get('name', 'N/A'),
