@@ -8,7 +8,7 @@ class DataCollector:
         self.data = self._get_sample_data()
     
     def _get_sample_data(self):
-        """Return sample data of 30 real AI apps with accurate information."""
+        """Return sample data of 29 real AI apps with accurate information."""
         return [
             # Chatbots/Assistants
             {

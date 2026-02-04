@@ -97,10 +97,6 @@ class ExcelWriter:
                 sanitized_name = sheet_name.replace('/', '-').replace('\\', '-').replace('[', '').replace(']', '').replace('*', '').replace('?', '').replace(':', '')
                 # Limit to 31 characters (Excel limit)
                 sanitized_name = sanitized_name[:31]
-                # Sanitize sheet name - Excel doesn't allow certain characters
-                sanitized_name = sheet_name.replace('/', '-').replace('\\', '-').replace('[', '').replace(']', '').replace('*', '').replace('?', '').replace(':', '')
-                # Limit to 31 characters (Excel limit)
-                sanitized_name = sanitized_name[:31]
                 
                 df = pd.DataFrame(data, columns=Config.EXCEL_COLUMNS)
                 df.to_excel(writer, sheet_name=sanitized_name, index=False)

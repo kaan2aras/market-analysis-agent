@@ -4,7 +4,7 @@ An AI-powered market research agent that automatically conducts condensed market
 
 ## Features
 
-- 🤖 **Automated Market Research**: Collects data on 30+ real AI applications and marketplaces
+- 🤖 **Automated Market Research**: Collects data on 29 real AI applications and marketplaces
 - 📊 **Excel Output**: Generates professionally formatted Excel files with clickable hyperlinks
 - 🔍 **Filtering Options**: Filter by category, region, and limit results
 - 📑 **Multi-Sheet Support**: Optionally group data by category in separate sheets
@@ -181,7 +181,7 @@ market-analysis-agent/
 
 ## Data Included
 
-The agent includes data on 30 real AI applications across multiple categories:
+The agent includes data on 29 real AI applications across multiple categories:
 
 ### Chatbots/Assistants (8 apps)
 - ChatGPT, Claude, Gemini, Microsoft Copilot, Perplexity, Character.AI, Pi, Poe
