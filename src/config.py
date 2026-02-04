@@ -1,45 +1,77 @@
 """Configuration settings for the market analysis agent."""
 
-# Field names for Excel output
-FIELD_NAMES = [
-    "App Name",
-    "Company/Developer",
-    "Category",
-    "AI Features",
-    "App Store Link",
-    "Play Store Link",
-    "Website",
-    "Rating (iOS)",
-    "Rating (Android)",
-    "Downloads",
-    "Pricing",
-    "Monthly Active Users",
-    "Trending Score",
-    "Region Availability",
-    "Last Updated"
-]
-
-# Mapping from database keys to field names
-FIELD_MAPPING = {
-    "app_name": "App Name",
-    "company": "Company/Developer",
-    "category": "Category",
-    "ai_features": "AI Features",
-    "app_store_link": "App Store Link",
-    "play_store_link": "Play Store Link",
-    "website": "Website",
-    "rating_ios": "Rating (iOS)",
-    "rating_android": "Rating (Android)",
-    "downloads": "Downloads",
-    "pricing": "Pricing",
-    "monthly_active_users": "Monthly Active Users",
-    "trending_score": "Trending Score",
-    "region_availability": "Region Availability",
-    "last_updated": "Last Updated"
-}
-
-# Excel styling
-HEADER_COLOR = "366092"  # Dark blue
-HEADER_FONT_COLOR = "FFFFFF"  # White
-EVEN_ROW_COLOR = "D9E1F2"  # Light blue
-ODD_ROW_COLOR = "FFFFFF"  # White
+class Config:
+    """Configuration class for market analysis agent."""
+    
+    # Default output settings
+    DEFAULT_OUTPUT_FILENAME = "market_analysis_output.xlsx"
+    
+    # Categories available for filtering
+    AVAILABLE_CATEGORIES = [
+        "Chatbot",
+        "Image Generation",
+        "Video/Audio",
+        "Productivity",
+        "Code Assistant",
+        "Writing Assistant",
+        "Data Analysis",
+        "All"
+    ]
+    
+    # Regions available for filtering
+    AVAILABLE_REGIONS = [
+        "Global",
+        "North America",
+        "Europe",
+        "Asia",
+        "All"
+    ]
+    
+    # Excel formatting settings
+    EXCEL_HEADER_FORMAT = {
+        'bold': True,
+        'bg_color': '#4472C4',
+        'font_color': '#FFFFFF',
+        'border': 1,
+        'align': 'center',
+        'valign': 'vcenter'
+    }
+    
+    EXCEL_CELL_FORMAT = {
+        'border': 1,
+        'align': 'left',
+        'valign': 'vcenter',
+        'text_wrap': True
+    }
+    
+    # Column headers for the Excel output
+    EXCEL_COLUMNS = [
+        'App Name',
+        'Company',
+        'Category',
+        'Pricing Model',
+        'Rating',
+        'Downloads',
+        'App Store Link',
+        'Play Store Link',
+        'Website',
+        'Key Features',
+        'Region',
+        'Last Updated'
+    ]
+    
+    # Column widths (in characters)
+    COLUMN_WIDTHS = {
+        'App Name': 20,
+        'Company': 18,
+        'Category': 15,
+        'Pricing Model': 12,
+        'Rating': 8,
+        'Downloads': 12,
+        'App Store Link': 15,
+        'Play Store Link': 15,
+        'Website': 15,
+        'Key Features': 40,
+        'Region': 12,
+        'Last Updated': 12
+    }
